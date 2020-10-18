@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="scvzAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="fakultet" EntityType="DBModel.fakultet" />
+    <EntitySet Name="kvar" EntityType="DBModel.kvar" />
+    <EntitySet Name="mjesec" EntityType="DBModel.mjesec" />
+    <EntitySet Name="obracun" EntityType="DBModel.obracun" />
+    <EntitySet Name="racun" EntityType="DBModel.racun" />
+    <EntitySet Name="racun_usluga" EntityType="DBModel.racun_usluga" />
+    <EntitySet Name="soba" EntityType="DBModel.soba" />
+    <EntitySet Name="student" EntityType="DBModel.student" />
+    <EntitySet Name="sysdiagrams" EntityType="DBModel.sysdiagrams" />
+    <EntitySet Name="tip_zaposlenika" EntityType="DBModel.tip_zaposlenika" />
+    <EntitySet Name="usluga" EntityType="DBModel.usluga" />
+    <EntitySet Name="zaposlenik" EntityType="DBModel.zaposlenik" />
+    <EntitySet Name="zupanija" EntityType="DBModel.zupanija" />
+    <AssociationSet Name="FK_student_fakultet" Association="DBModel.FK_student_fakultet">
+      <End Role="fakultet" EntitySet="fakultet" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="fk_kvar_soba1" Association="DBModel.fk_kvar_soba1">
+      <End Role="soba" EntitySet="soba" />
+      <End Role="kvar" EntitySet="kvar" />
+    </AssociationSet>
+    <AssociationSet Name="fk_kvar_student1" Association="DBModel.fk_kvar_student1">
+      <End Role="student" EntitySet="student" />
+      <End Role="kvar" EntitySet="kvar" />
+    </AssociationSet>
+    <AssociationSet Name="fk_kvar_zaposlenik1" Association="DBModel.fk_kvar_zaposlenik1">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="kvar" EntitySet="kvar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obracun_mjesec" Association="DBModel.FK_obracun_mjesec">
+      <End Role="mjesec" EntitySet="mjesec" />
+      <End Role="obracun" EntitySet="obracun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obracun_zaposlenik" Association="DBModel.FK_obracun_zaposlenik">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="obracun" EntitySet="obracun" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_has_usluga_racun1" Association="DBModel.fk_racun_has_usluga_racun1">
+      <End Role="racun" EntitySet="racun" />
+      <End Role="racun_usluga" EntitySet="racun_usluga" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_student1" Association="DBModel.fk_racun_student1">
+      <End Role="student" EntitySet="student" />
+      <End Role="racun" EntitySet="racun" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_zaposlenik1" Association="DBModel.fk_racun_zaposlenik1">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="racun" EntitySet="racun" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_has_usluga_usluga1" Association="DBModel.fk_racun_has_usluga_usluga1">
+      <End Role="usluga" EntitySet="usluga" />
+      <End Role="racun_usluga" EntitySet="racun_usluga" />
+    </AssociationSet>
+    <AssociationSet Name="fk_student_soba1" Association="DBModel.fk_student_soba1">
+      <End Role="soba" EntitySet="soba" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_zupanija" Association="DBModel.FK_student_zupanija">
+      <End Role="zupanija" EntitySet="zupanija" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="fk_zaposlenik_tip_zaposlenika1" Association="DBModel.fk_zaposlenik_tip_zaposlenika1">
+      <End Role="tip_zaposlenika" EntitySet="tip_zaposlenika" />
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+    </AssociationSet>
+    <EntitySet Name="smjena" EntityType="DBModel.smjena" />
+    <AssociationSet Name="FK_smjena_mjesec" Association="DBModel.FK_smjena_mjesec">
+      <End Role="mjesec" EntitySet="mjesec" />
+      <End Role="smjena" EntitySet="smjena" />
+    </AssociationSet>
+    <AssociationSet Name="FK_smjena_zaposlenik" Association="DBModel.FK_smjena_zaposlenik">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="smjena" EntitySet="smjena" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="fakultet">
+    <Key>
+      <PropertyRef Name="idfakultet" />
+    </Key>
+    <Property Name="idfakultet" Type="Int32" Nullable="false" />
+    <Property Name="naziv" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="adresa" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="student" Relationship="DBModel.FK_student_fakultet" FromRole="fakultet" ToRole="student" />
+  </EntityType>
+  <EntityType Name="kvar">
+    <Key>
+      <PropertyRef Name="idkvar" />
+    </Key>
+    <Property Name="idkvar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="datum_prijave" Type="DateTime" Precision="0" />
+    <Property Name="kvar_idsoba" Type="Int32" Nullable="false" />
+    <Property Name="kvar__prijavio_idstudent" Type="Int32" Nullable="false" />
+    <Property Name="kvar_zaprimio_idzaposlenik" Type="Int32" Nullable="false" />
+    <Property Name="status_kvara" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="soba" Relationship="DBModel.fk_kvar_soba1" FromRole="kvar" ToRole="soba" />
+    <NavigationProperty Name="student" Relationship="DBModel.fk_kvar_student1" FromRole="kvar" ToRole="student" />
+    <NavigationProperty Name="zaposlenik" Relationship="DBModel.fk_kvar_zaposlenik1" FromRole="kvar" ToRole="zaposlenik" />
+  </EntityType>
+  <EntityType Name="mjesec">
+    <Key>
+      <PropertyRef Name="idmjesec" />
+    </Key>
+    <Property Name="idmjesec" Type="Int32" Nullable="false" />
+    <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="obracun" Relationship="DBModel.FK_obracun_mjesec" FromRole="mjesec" ToRole="obracun" />
+    <NavigationProperty Name="smjena" Relationship="DBModel.FK_smjena_mjesec" FromRole="mjesec" ToRole="smjena" />
+  </EntityType>
+  <EntityType Name="obracun">
+    <Key>
+      <PropertyRef Name="obracunid" />
+    </Key>
+    <Property Name="obracunid" Type="Int32" Nullable="false" />
+    <Property Name="broj_odradjenih_sati" Type="Int32" />
+    <Property Name="iznos" Type="Int32" />
+    <Property Name="zaposlenikID" Type="Int32" />
+    <Property Name="mjesecID" Type="Int32" />
+    <NavigationProperty Name="mjesec" Relationship="DBModel.FK_obracun_mjesec" FromRole="obracun" ToRole="mjesec" />
+    <NavigationProperty Name="zaposlenik" Relationship="DBModel.FK_obracun_zaposlenik" FromRole="obracun" ToRole="zaposlenik" />
+  </EntityType>
+  <EntityType Name="racun">
+    <Key>
+      <PropertyRef Name="idracun" />
+    </Key>
+    <Property Name="idracun" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datum_vrijeme_racuna" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ukupna_cijena" Type="Double" />
+    <Property Name="nacin_placanja" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="racun_student" Type="Int32" />
+    <Property Name="zaposlenik_idzaposlenik" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="racun_usluga" Relationship="DBModel.fk_racun_has_usluga_racun1" FromRole="racun" ToRole="racun_usluga" />
+    <NavigationProperty Name="student" Relationship="DBModel.fk_racun_student1" FromRole="racun" ToRole="student" />
+    <NavigationProperty Name="zaposlenik" Relationship="DBModel.fk_racun_zaposlenik1" FromRole="racun" ToRole="zaposlenik" />
+  </EntityType>
+  <EntityType Name="racun_usluga">
+    <Key>
+      <PropertyRef Name="racun_idracun" />
+      <PropertyRef Name="usluga_idusluga" />
+    </Key>
+    <Property Name="racun_idracun" Type="Int32" Nullable="false" />
+    <Property Name="usluga_idusluga" Type="Int32" Nullable="false" />
+    <Property Name="kolicina" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="racun" Relationship="DBModel.fk_racun_has_usluga_racun1" FromRole="racun_usluga" ToRole="racun" />
+    <NavigationProperty Name="usluga" Relationship="DBModel.fk_racun_has_usluga_usluga1" FromRole="racun_usluga" ToRole="usluga" />
+  </EntityType>
+  <EntityType Name="soba">
+    <Key>
+      <PropertyRef Name="idsoba" />
+    </Key>
+    <Property Name="idsoba" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="broj_sobe" Type="Int32" />
+    <Property Name="broj_kreveta" Type="Int32" />
+    <NavigationProperty Name="kvar" Relationship="DBModel.fk_kvar_soba1" FromRole="soba" ToRole="kvar" />
+    <NavigationProperty Name="student" Relationship="DBModel.fk_student_soba1" FromRole="soba" ToRole="student" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="idstudent" />
+    </Key>
+    <Property Name="idstudent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ime" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="prezime" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="adresa" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="zupanija" Type="Int32" />
+    <Property Name="spol" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="datum_rodjenja" Type="DateTime" Precision="0" />
+    <Property Name="student_soba" Type="Int32" />
+    <Property Name="fakultet" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="fakultet1" Relationship="DBModel.FK_student_fakultet" FromRole="student" ToRole="fakultet" />
+    <NavigationProperty Name="kvar" Relationship="DBModel.fk_kvar_student1" FromRole="student" ToRole="kvar" />
+    <NavigationProperty Name="racun" Relationship="DBModel.fk_racun_student1" FromRole="student" ToRole="racun" />
+    <NavigationProperty Name="soba" Relationship="DBModel.fk_student_soba1" FromRole="student" ToRole="soba" />
+    <NavigationProperty Name="zupanija1" Relationship="DBModel.FK_student_zupanija" FromRole="student" ToRole="zupanija" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tip_zaposlenika">
+    <Key>
+      <PropertyRef Name="idtip_zaposlenika" />
+    </Key>
+    <Property Name="idtip_zaposlenika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naziv" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="zaposlenik" Relationship="DBModel.fk_zaposlenik_tip_zaposlenika1" FromRole="tip_zaposlenika" ToRole="zaposlenik" />
+  </EntityType>
+  <EntityType Name="usluga">
+    <Key>
+      <PropertyRef Name="idusluga" />
+    </Key>
+    <Property Name="idusluga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naziv" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="cijena" Type="Double" />
+    <NavigationProperty Name="racun_usluga" Relationship="DBModel.fk_racun_has_usluga_usluga1" FromRole="usluga" ToRole="racun_usluga" />
+  </EntityType>
+  <EntityType Name="zaposlenik">
+    <Key>
+      <PropertyRef Name="idzaposlenik" />
+    </Key>
+    <Property Name="idzaposlenik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ime" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="prezime" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="korisnicko_ime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="telefon" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="lozinka" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="zaposlenik_tip_zaposlenika" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="kvar" Relationship="DBModel.fk_kvar_zaposlenik1" FromRole="zaposlenik" ToRole="kvar" />
+    <NavigationProperty Name="obracun" Relationship="DBModel.FK_obracun_zaposlenik" FromRole="zaposlenik" ToRole="obracun" />
+    <NavigationProperty Name="racun" Relationship="DBModel.fk_racun_zaposlenik1" FromRole="zaposlenik" ToRole="racun" />
+    <NavigationProperty Name="tip_zaposlenika" Relationship="DBModel.fk_zaposlenik_tip_zaposlenika1" FromRole="zaposlenik" ToRole="tip_zaposlenika" />
+    <NavigationProperty Name="smjena" Relationship="DBModel.FK_smjena_zaposlenik" FromRole="zaposlenik" ToRole="smjena" />
+  </EntityType>
+  <EntityType Name="zupanija">
+    <Key>
+      <PropertyRef Name="idzupanija" />
+    </Key>
+    <Property Name="idzupanija" Type="Int32" Nullable="false" />
+    <Property Name="naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="student" Relationship="DBModel.FK_student_zupanija" FromRole="zupanija" ToRole="student" />
+  </EntityType>
+  <Association Name="FK_student_fakultet">
+    <End Type="DBModel.fakultet" Role="fakultet" Multiplicity="1" />
+    <End Type="DBModel.student" Role="student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fakultet">
+        <PropertyRef Name="idfakultet" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="fakultet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_kvar_soba1">
+    <End Type="DBModel.soba" Role="soba" Multiplicity="1" />
+    <End Type="DBModel.kvar" Role="kvar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="soba">
+        <PropertyRef Name="idsoba" />
+      </Principal>
+      <Dependent Role="kvar">
+        <PropertyRef Name="kvar_idsoba" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_kvar_student1">
+    <End Type="DBModel.student" Role="student" Multiplicity="1" />
+    <End Type="DBModel.kvar" Role="kvar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="idstudent" />
+      </Principal>
+      <Dependent Role="kvar">
+        <PropertyRef Name="kvar__prijavio_idstudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_kvar_zaposlenik1">
+    <End Type="DBModel.zaposlenik" Role="zaposlenik" Multiplicity="1" />
+    <End Type="DBModel.kvar" Role="kvar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="kvar">
+        <PropertyRef Name="kvar_zaprimio_idzaposlenik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obracun_mjesec">
+    <End Type="DBModel.mjesec" Role="mjesec" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBModel.obracun" Role="obracun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mjesec">
+        <PropertyRef Name="idmjesec" />
+      </Principal>
+      <Dependent Role="obracun">
+        <PropertyRef Name="mjesecID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obracun_zaposlenik">
+    <End Type="DBModel.zaposlenik" Role="zaposlenik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBModel.obracun" Role="obracun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="obracun">
+        <PropertyRef Name="zaposlenikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_has_usluga_racun1">
+    <End Type="DBModel.racun" Role="racun" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBModel.racun_usluga" Role="racun_usluga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="racun">
+        <PropertyRef Name="idracun" />
+      </Principal>
+      <Dependent Role="racun_usluga">
+        <PropertyRef Name="racun_idracun" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_student1">
+    <End Type="DBModel.student" Role="student" Multiplicity="0..1" />
+    <End Type="DBModel.racun" Role="racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="idstudent" />
+      </Principal>
+      <Dependent Role="racun">
+        <PropertyRef Name="racun_student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_zaposlenik1">
+    <End Type="DBModel.zaposlenik" Role="zaposlenik" Multiplicity="1" />
+    <End Type="DBModel.racun" Role="racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="racun">
+        <PropertyRef Name="zaposlenik_idzaposlenik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_has_usluga_usluga1">
+    <End Type="DBModel.usluga" Role="usluga" Multiplicity="1" />
+    <End Type="DBModel.racun_usluga" Role="racun_usluga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usluga">
+        <PropertyRef Name="idusluga" />
+      </Principal>
+      <Dependent Role="racun_usluga">
+        <PropertyRef Name="usluga_idusluga" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_student_soba1">
+    <End Type="DBModel.soba" Role="soba" Multiplicity="0..1" />
+    <End Type="DBModel.student" Role="student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="soba">
+        <PropertyRef Name="idsoba" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="student_soba" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_zupanija">
+    <End Type="DBModel.zupanija" Role="zupanija" Multiplicity="0..1" />
+    <End Type="DBModel.student" Role="student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zupanija">
+        <PropertyRef Name="idzupanija" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="zupanija" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_zaposlenik_tip_zaposlenika1">
+    <End Type="DBModel.tip_zaposlenika" Role="tip_zaposlenika" Multiplicity="1" />
+    <End Type="DBModel.zaposlenik" Role="zaposlenik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tip_zaposlenika">
+        <PropertyRef Name="idtip_zaposlenika" />
+      </Principal>
+      <Dependent Role="zaposlenik">
+        <PropertyRef Name="zaposlenik_tip_zaposlenika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="smjena">
+    <Key>
+      <PropertyRef Name="idsmjena" />
+    </Key>
+    <Property Name="idsmjena" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dan_u_mjesecu" Type="Int32" />
+    <Property Name="vrsta_smjene" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="zaposlenikID" Type="Int32" />
+    <Property Name="mjesecID" Type="Int32" />
+    <NavigationProperty Name="mjesec" Relationship="DBModel.FK_smjena_mjesec" FromRole="smjena" ToRole="mjesec" />
+    <NavigationProperty Name="zaposlenik" Relationship="DBModel.FK_smjena_zaposlenik" FromRole="smjena" ToRole="zaposlenik" />
+  </EntityType>
+  <Association Name="FK_smjena_mjesec">
+    <End Type="DBModel.mjesec" Role="mjesec" Multiplicity="0..1" />
+    <End Type="DBModel.smjena" Role="smjena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mjesec">
+        <PropertyRef Name="idmjesec" />
+      </Principal>
+      <Dependent Role="smjena">
+        <PropertyRef Name="mjesecID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_smjena_zaposlenik">
+    <End Type="DBModel.zaposlenik" Role="zaposlenik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBModel.smjena" Role="smjena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="smjena">
+        <PropertyRef Name="zaposlenikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

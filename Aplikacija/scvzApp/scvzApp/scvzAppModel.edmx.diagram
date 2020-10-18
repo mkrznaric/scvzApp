@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="de81c9d54e5940c6b5110c822c9b9181" Name="Diagram1">
+        <EntityTypeShape EntityType="DBModel.fakultet" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="DBModel.kvar" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="DBModel.mjesec" Width="1.5" PointX="3" PointY="2.875" />
+        <EntityTypeShape EntityType="DBModel.obracun" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="DBModel.racun" Width="1.5" PointX="8.25" PointY="6.375" />
+        <EntityTypeShape EntityType="DBModel.racun_usluga" Width="1.5" PointX="10.5" PointY="6.75" />
+        <EntityTypeShape EntityType="DBModel.soba" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="DBModel.student" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="DBModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBModel.tip_zaposlenika" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="DBModel.usluga" Width="1.5" PointX="8.25" PointY="2.875" />
+        <EntityTypeShape EntityType="DBModel.zaposlenik" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="DBModel.zupanija" Width="1.5" PointX="0.75" PointY="10.375" />
+        <AssociationConnector Association="DBModel.FK_student_fakultet" />
+        <AssociationConnector Association="DBModel.fk_kvar_soba1" />
+        <AssociationConnector Association="DBModel.fk_kvar_student1" />
+        <AssociationConnector Association="DBModel.fk_kvar_zaposlenik1" />
+        <AssociationConnector Association="DBModel.FK_obracun_mjesec" />
+        <AssociationConnector Association="DBModel.FK_obracun_zaposlenik" />
+        <AssociationConnector Association="DBModel.fk_racun_has_usluga_racun1" />
+        <AssociationConnector Association="DBModel.fk_racun_student1" />
+        <AssociationConnector Association="DBModel.fk_racun_zaposlenik1" />
+        <AssociationConnector Association="DBModel.fk_racun_has_usluga_usluga1" />
+        <AssociationConnector Association="DBModel.fk_student_soba1" />
+        <AssociationConnector Association="DBModel.FK_student_zupanija" />
+        <AssociationConnector Association="DBModel.fk_zaposlenik_tip_zaposlenika1" />
+        <EntityTypeShape EntityType="DBModel.smjena" Width="1.5" PointX="5.25" PointY="3" />
+        <AssociationConnector Association="DBModel.FK_smjena_mjesec" />
+        <AssociationConnector Association="DBModel.FK_smjena_zaposlenik" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

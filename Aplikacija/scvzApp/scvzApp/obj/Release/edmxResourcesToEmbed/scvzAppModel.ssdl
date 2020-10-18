@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="fakultet">
+    <Key>
+      <PropertyRef Name="idfakultet" />
+    </Key>
+    <Property Name="idfakultet" Type="int" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="150" />
+    <Property Name="adresa" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="kvar">
+    <Key>
+      <PropertyRef Name="idkvar" />
+    </Key>
+    <Property Name="idkvar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="opis" Type="varchar(max)" />
+    <Property Name="datum_prijave" Type="date" />
+    <Property Name="kvar_idsoba" Type="int" Nullable="false" />
+    <Property Name="kvar__prijavio_idstudent" Type="int" Nullable="false" />
+    <Property Name="kvar_zaprimio_idzaposlenik" Type="int" Nullable="false" />
+    <Property Name="status_kvara" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="mjesec">
+    <Key>
+      <PropertyRef Name="idmjesec" />
+    </Key>
+    <Property Name="idmjesec" Type="int" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="obracun">
+    <Key>
+      <PropertyRef Name="obracunid" />
+    </Key>
+    <Property Name="obracunid" Type="int" Nullable="false" />
+    <Property Name="broj_odradjenih_sati" Type="int" />
+    <Property Name="iznos" Type="int" />
+    <Property Name="zaposlenikID" Type="int" />
+    <Property Name="mjesecID" Type="int" />
+  </EntityType>
+  <EntityType Name="racun">
+    <Key>
+      <PropertyRef Name="idracun" />
+    </Key>
+    <Property Name="idracun" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datum_vrijeme_racuna" Type="varchar" MaxLength="45" />
+    <Property Name="ukupna_cijena" Type="float" />
+    <Property Name="nacin_placanja" Type="varchar" MaxLength="45" />
+    <Property Name="racun_student" Type="int" />
+    <Property Name="zaposlenik_idzaposlenik" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="racun_usluga">
+    <Key>
+      <PropertyRef Name="racun_idracun" />
+      <PropertyRef Name="usluga_idusluga" />
+    </Key>
+    <Property Name="racun_idracun" Type="int" Nullable="false" />
+    <Property Name="usluga_idusluga" Type="int" Nullable="false" />
+    <Property Name="kolicina" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="smjena">
+    <Key>
+      <PropertyRef Name="idsmjena" />
+    </Key>
+    <Property Name="idsmjena" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dan_u_mjesecu" Type="int" />
+    <Property Name="vrsta_smjene" Type="varchar" MaxLength="20" />
+    <Property Name="zaposlenikID" Type="int" />
+    <Property Name="mjesecID" Type="int" />
+  </EntityType>
+  <EntityType Name="soba">
+    <Key>
+      <PropertyRef Name="idsoba" />
+    </Key>
+    <Property Name="idsoba" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="broj_sobe" Type="int" />
+    <Property Name="broj_kreveta" Type="int" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="idstudent" />
+    </Key>
+    <Property Name="idstudent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ime" Type="varchar" MaxLength="45" />
+    <Property Name="prezime" Type="varchar" MaxLength="45" />
+    <Property Name="adresa" Type="varchar" MaxLength="45" />
+    <Property Name="zupanija" Type="int" />
+    <Property Name="spol" Type="varchar" MaxLength="45" />
+    <Property Name="datum_rodjenja" Type="date" />
+    <Property Name="student_soba" Type="int" />
+    <Property Name="fakultet" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tip_zaposlenika">
+    <Key>
+      <PropertyRef Name="idtip_zaposlenika" />
+    </Key>
+    <Property Name="idtip_zaposlenika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="usluga">
+    <Key>
+      <PropertyRef Name="idusluga" />
+    </Key>
+    <Property Name="idusluga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="45" />
+    <Property Name="cijena" Type="float" />
+  </EntityType>
+  <EntityType Name="zaposlenik">
+    <Key>
+      <PropertyRef Name="idzaposlenik" />
+    </Key>
+    <Property Name="idzaposlenik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ime" Type="varchar" MaxLength="45" />
+    <Property Name="prezime" Type="varchar" MaxLength="45" />
+    <Property Name="korisnicko_ime" Type="varchar" MaxLength="20" />
+    <Property Name="telefon" Type="varchar" MaxLength="45" />
+    <Property Name="email" Type="varchar" MaxLength="45" />
+    <Property Name="lozinka" Type="varchar" MaxLength="255" />
+    <Property Name="zaposlenik_tip_zaposlenika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="zupanija">
+    <Key>
+      <PropertyRef Name="idzupanija" />
+    </Key>
+    <Property Name="idzupanija" Type="int" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="fk_kvar_soba1">
+    <End Role="soba" Type="Self.soba" Multiplicity="1" />
+    <End Role="kvar" Type="Self.kvar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="soba">
+        <PropertyRef Name="idsoba" />
+      </Principal>
+      <Dependent Role="kvar">
+        <PropertyRef Name="kvar_idsoba" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_kvar_student1">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="kvar" Type="Self.kvar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="idstudent" />
+      </Principal>
+      <Dependent Role="kvar">
+        <PropertyRef Name="kvar__prijavio_idstudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_kvar_zaposlenik1">
+    <End Role="zaposlenik" Type="Self.zaposlenik" Multiplicity="1" />
+    <End Role="kvar" Type="Self.kvar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="kvar">
+        <PropertyRef Name="kvar_zaprimio_idzaposlenik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obracun_mjesec">
+    <End Role="mjesec" Type="Self.mjesec" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="obracun" Type="Self.obracun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mjesec">
+        <PropertyRef Name="idmjesec" />
+      </Principal>
+      <Dependent Role="obracun">
+        <PropertyRef Name="mjesecID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obracun_zaposlenik">
+    <End Role="zaposlenik" Type="Self.zaposlenik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="obracun" Type="Self.obracun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="obracun">
+        <PropertyRef Name="zaposlenikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_has_usluga_racun1">
+    <End Role="racun" Type="Self.racun" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="racun_usluga" Type="Self.racun_usluga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="racun">
+        <PropertyRef Name="idracun" />
+      </Principal>
+      <Dependent Role="racun_usluga">
+        <PropertyRef Name="racun_idracun" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_has_usluga_usluga1">
+    <End Role="usluga" Type="Self.usluga" Multiplicity="1" />
+    <End Role="racun_usluga" Type="Self.racun_usluga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usluga">
+        <PropertyRef Name="idusluga" />
+      </Principal>
+      <Dependent Role="racun_usluga">
+        <PropertyRef Name="usluga_idusluga" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_student1">
+    <End Role="student" Type="Self.student" Multiplicity="0..1" />
+    <End Role="racun" Type="Self.racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="idstudent" />
+      </Principal>
+      <Dependent Role="racun">
+        <PropertyRef Name="racun_student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_racun_zaposlenik1">
+    <End Role="zaposlenik" Type="Self.zaposlenik" Multiplicity="1" />
+    <End Role="racun" Type="Self.racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="racun">
+        <PropertyRef Name="zaposlenik_idzaposlenik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_smjena_mjesec">
+    <End Role="mjesec" Type="Self.mjesec" Multiplicity="0..1" />
+    <End Role="smjena" Type="Self.smjena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mjesec">
+        <PropertyRef Name="idmjesec" />
+      </Principal>
+      <Dependent Role="smjena">
+        <PropertyRef Name="mjesecID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_smjena_zaposlenik">
+    <End Role="zaposlenik" Type="Self.zaposlenik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="smjena" Type="Self.smjena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zaposlenik">
+        <PropertyRef Name="idzaposlenik" />
+      </Principal>
+      <Dependent Role="smjena">
+        <PropertyRef Name="zaposlenikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_fakultet">
+    <End Role="fakultet" Type="Self.fakultet" Multiplicity="1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fakultet">
+        <PropertyRef Name="idfakultet" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="fakultet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_student_soba1">
+    <End Role="soba" Type="Self.soba" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="soba">
+        <PropertyRef Name="idsoba" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="student_soba" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_zupanija">
+    <End Role="zupanija" Type="Self.zupanija" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zupanija">
+        <PropertyRef Name="idzupanija" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="zupanija" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_zaposlenik_tip_zaposlenika1">
+    <End Role="tip_zaposlenika" Type="Self.tip_zaposlenika" Multiplicity="1" />
+    <End Role="zaposlenik" Type="Self.zaposlenik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tip_zaposlenika">
+        <PropertyRef Name="idtip_zaposlenika" />
+      </Principal>
+      <Dependent Role="zaposlenik">
+        <PropertyRef Name="zaposlenik_tip_zaposlenika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBModelStoreContainer">
+    <EntitySet Name="fakultet" EntityType="Self.fakultet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kvar" EntityType="Self.kvar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mjesec" EntityType="Self.mjesec" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="obracun" EntityType="Self.obracun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="racun" EntityType="Self.racun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="racun_usluga" EntityType="Self.racun_usluga" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="smjena" EntityType="Self.smjena" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="soba" EntityType="Self.soba" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tip_zaposlenika" EntityType="Self.tip_zaposlenika" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usluga" EntityType="Self.usluga" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zaposlenik" EntityType="Self.zaposlenik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="zupanija" EntityType="Self.zupanija" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_kvar_soba1" Association="Self.fk_kvar_soba1">
+      <End Role="soba" EntitySet="soba" />
+      <End Role="kvar" EntitySet="kvar" />
+    </AssociationSet>
+    <AssociationSet Name="fk_kvar_student1" Association="Self.fk_kvar_student1">
+      <End Role="student" EntitySet="student" />
+      <End Role="kvar" EntitySet="kvar" />
+    </AssociationSet>
+    <AssociationSet Name="fk_kvar_zaposlenik1" Association="Self.fk_kvar_zaposlenik1">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="kvar" EntitySet="kvar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obracun_mjesec" Association="Self.FK_obracun_mjesec">
+      <End Role="mjesec" EntitySet="mjesec" />
+      <End Role="obracun" EntitySet="obracun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obracun_zaposlenik" Association="Self.FK_obracun_zaposlenik">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="obracun" EntitySet="obracun" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_has_usluga_racun1" Association="Self.fk_racun_has_usluga_racun1">
+      <End Role="racun" EntitySet="racun" />
+      <End Role="racun_usluga" EntitySet="racun_usluga" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_has_usluga_usluga1" Association="Self.fk_racun_has_usluga_usluga1">
+      <End Role="usluga" EntitySet="usluga" />
+      <End Role="racun_usluga" EntitySet="racun_usluga" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_student1" Association="Self.fk_racun_student1">
+      <End Role="student" EntitySet="student" />
+      <End Role="racun" EntitySet="racun" />
+    </AssociationSet>
+    <AssociationSet Name="fk_racun_zaposlenik1" Association="Self.fk_racun_zaposlenik1">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="racun" EntitySet="racun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_smjena_mjesec" Association="Self.FK_smjena_mjesec">
+      <End Role="mjesec" EntitySet="mjesec" />
+      <End Role="smjena" EntitySet="smjena" />
+    </AssociationSet>
+    <AssociationSet Name="FK_smjena_zaposlenik" Association="Self.FK_smjena_zaposlenik">
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+      <End Role="smjena" EntitySet="smjena" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_fakultet" Association="Self.FK_student_fakultet">
+      <End Role="fakultet" EntitySet="fakultet" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="fk_student_soba1" Association="Self.fk_student_soba1">
+      <End Role="soba" EntitySet="soba" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_zupanija" Association="Self.FK_student_zupanija">
+      <End Role="zupanija" EntitySet="zupanija" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="fk_zaposlenik_tip_zaposlenika1" Association="Self.fk_zaposlenik_tip_zaposlenika1">
+      <End Role="tip_zaposlenika" EntitySet="tip_zaposlenika" />
+      <End Role="zaposlenik" EntitySet="zaposlenik" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
